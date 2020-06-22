@@ -1,0 +1,33 @@
+https://github.com/StydeNet/laravel-7
+https://laravel.com/docs/7.x/upgrade#assert-see
+https://github.com/StydeNet/laravel-7/tree/dependabot/composer/symfony/http-foundation-5.0.7
+
+assertSee, assertDontSee, assertSeeText, assertDontSeeText, assertSeeInOrder and assertSeeTextInOrder
+
+que imprime el valor establecido:
+
+$response->assertSee($value, $escaped = true);
+
+$response->assertStatus(200)->assertSee('<label for="mail_address"> Correo electronico</label>',false);
+
+$response->assertStatus(200)->assertSeeText('Correo electronico');
+
+response->assertStatus(200)->assertSee('title');
+
+assertSeeText si se encuentra dentro de la etiqueta HTML, si es el nombre o parametro assertSeeText.
+
+
+Crear unas consultas 
+php artisan make:test TestUnitTest --unit
+
+Test\Testcase
+Illuminate\Foundation\Testing\TestCase
+
+use RefreshDatabase
+
+$user =new user(['name'=>'hugo bermudez']);
+
+php artisan test
+
+phpunit.xml:
+<phpunit printerClass="NunoMaduro\Collision\Adapters\PHPUnit\Printer">

@@ -1,0 +1,63 @@
+php artisan make:controller NoteController
+
+
+app/Http/Controllers/NoteController:
+
+
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Note;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
+class NoteController extends Controller
+{
+    public function index()
+    {
+        $notes = Note::all();
+
+        return view('notes', ['notes' => $notes]);
+    }
+
+    function show($id)
+    {
+        return 'Aquí veremos el detalle de la nota: '.$id;
+    }
+
+    public function create()
+    {
+        return view('add-note');
+    }
+
+    // store...
+
+    public function edit($id)
+    {
+        $note = Note::find($id);
+
+        return ['note' => $note];
+    }
+}
+
+
+web.php:
+
+<?php
+ 
+<?php
+ 
+// routes/web.php
+ 
+Route::get('/', 'NoteController@index')->name('notes');
+ 
+Route::get('notas/{id}', 'NoteController@show')->name('notes.show');
+ 
+Route::get('notas/crear', 'NoteController@create')->name('notes.create');
+ 
+// store...
+ 
+Route::get('notas/{id}/editar', 'NoteController@edit')->name('notes.edit');
+
+

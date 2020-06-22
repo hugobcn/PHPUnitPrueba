@@ -1,0 +1,112 @@
+
+
+Route::post('notas', function (Request $request) {
+    $request->validate([
+      'title' => 'required',
+      'content' => 'required',
+    ]);
+ 
+    // El resto del código va aquí
+})->name('notes.store');
+
+
+<input type="text" name="title" id="title" class="field-input @error field-error @enderror">
+@error('title')
+    <p class="error-message">{{ $message }}</p>
+@
+
+
+----paquetes errores lang----
+----solo en producion---
+env:
+app_env =production
+app_debug=false
+---------------
+https://github.com/caouecs/laravel-lang/archive/master.
+https://github.com/caouecs/Laravel-lang/tree/master/src
+
+$cp -r ~/Dowloans/larvel-lag-master/src/es
+al principio pagina:
+@if ($errors->any())
+    <div class="errors">
+        <p><strong>Por favor corrige los siguientes errores<strong></p>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+config/app.
+fallback_locale
+
+return [
+    'locale' => 'es',
+];
+
+instalar en resources/lang/es
+
+
+probar laravel meesage rror 
+
+h@if ($errors->any())
+    <div class="errors">
+        <p><strong>Por favor corrige los siguientes errores<strong></p>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+mostrar rn un campo:
+
+<input type="text" name="title" id="title" class="field-input {{ $errors->has('title') ? 'field-error' : '' }}">
+@if ($errors->has('title'))
+    <span class="error-message">{{ $errors->first('title') }}</span>
+@endif
+
+
+Conservar los datos del formulario luego de un error de validación
+
+<form>
+   <input name="title" value="{{ old('title') }}">
+ 
+   <textarea name="content">{{ old('content') }}</textarea>
+</form>
+
+reglas validacion:
+
+$request->validate([
+    'title' => ['required', 'min:3', 'unique:notes'],
+    // unique:notes es suficiente si el nombre de la columna y el campo coinciden
+    //...
+]);
+
+
+use Illuminate\Validation\Rule;
+ 
+//...
+ 
+$request->validate([
+    'title' => ['required', 'min:3', Rule::unique('notes')],
+    //...
+]);
+
+web.php anonima
+
+Route::post('notas', function (Request $request) {
+    $request->validate([
+        'title' => ['required', 'min:3', Rule::unique('notes')],
+        'content' => 'required',
+    ]);
+
+    Note::create([
+        'title' => $request->input('title'),
+        'content' => $request->input('content'),
+    ]);
+
+    return redirect()->route('notes');
+})->name('notes.store');

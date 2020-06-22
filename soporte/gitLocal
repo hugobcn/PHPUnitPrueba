@@ -1,0 +1,56 @@
+crear projecto container en repositorio: ../02Container$ git init
+                                                         git status
+
+añadir fichero(.gitignore) en raiz proyecto para no instlar archivos o directorios  : 
+   añadir carpetas no querer añadir en fichero
+        .idea/
+        vendor/
+
+
+
+chequear funcionalidad .gitignore:  ../02Container$ git status
+
+añadir carpetas no ignoradas: ../02Container$ git add .
+git add <folder>/*,  git add ../soporte/* 
+
+
+    git add --all
+
+    git commit -am "<commit message>"
+
+    git push
+
+chequear carpetas subidas:  ../02Container$ git status
+git config --global user.email "you@example.com"
+
+crear commit: ../02Container$ git commit -m "primer commit"
+
+git push origin master
+
+------- origins----
+
+$git remote -v
+myOrigin ssh://git@example.com:1234/myRepo.git (fetch)
+myOrigin ssh://git@example.com:1234/myRepo.git (push)
+
+# this will fail because `origin` is not set
+$git push origin master
+
+# you need to use
+$git push myOrigin master
+
+If you want to rename the remote or change the remote's URL, you'll want to first remove the old remote, and then add the correct one.
+
+Remove the old remote
+
+$git remote remove myOrigin
+
+Add missing remote
+
+You can then add in the proper remote using
+
+$git remote add origin ssh://git@example.com:1234/myRepo.git
+
+# this will now work as expected
+$git push origin master
+

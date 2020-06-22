@@ -1,0 +1,75 @@
+https://github.com/StydeNet/laravel-7
+https://laravel.com/docs/7.x/upgrade#assert-see
+
+php artisan make:model Post -m   hacer modelo con su migracion
+
+
+migracion/CreatePostsTable
+
+
+public function up()
+    {
+        Schema::create('posts', function (Blueprint $table) {
+            $table->bigIncrements('id');
+ 
+            $table->string('title');
+            $table->string('slug')->unique();
+ 
+            $table->timestamps();
+        });
+    }
+
+
+configurar .env para base datos
+
+php artisan tinker:
+
+App\Post::forceCreate(['title' => 'Laravel 6', 'slug' => 'laravel-6']);
+ 
+App\Post::forceCreate(['title' => 'Laravel 7', 'slug' => 'laravel-7']);
+
+<?php
+ 
+Route::get('posts/{post}', function ($post) {
+    dd($post); 
+});
+
+model
+
+public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+web.php:
+
+Route::get('admin/posts/{post}', function (App\Post $post) {
+    dd($post);
+});
+//App\Post::where('slug', $post)->firstOrFail():
+model:
+
+Route::get('admin/posts/{post}', function (App\Post $post) {
+    dd($post);
+});
+
+
+php artisan --version
+
+Podemos obtener el comportamiento anterior sin sobrescribir el método 
+getRouteKeyName en el modelo. Simplemente vamos a definir la ruta donde 
+queremos enlazar con slug y no con id de esta forma
+
+sin sobrescribir el método getRouteKeyName en el modelo. 
+Simplemente vamos a definir la ruta donde queremos enlazar con slug 
+y no con id de esta forma:
+
+<?php
+ 
+Route::get('posts/{post:slug}', function (App\Post $post) {
+    dd($post);
+});
+ 
+
+Nota la sintaxis de dos puntos seguido del nombre de la columna con la cual 
+queremos crear el enlace.

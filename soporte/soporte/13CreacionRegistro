@@ -1,0 +1,79 @@
+
+web:
+
+@extends('layout')
+
+@section('title', 'Crea una nota')
+
+@section('content')
+
+<form method="POST" action="{{ url('notas') }}">
+    @csrf
+ 
+    <button type="submit" class="btn btn-primary">Crear nota</button>
+</form>
+
+@endsection
+<input type="hidden" name="_token" value="3st335unT0k3nD3ej3mpl0">
+
+
+----facade---
+resources/routes con Facade:
+
+
+Injectar Illuminate\Http\Request web.php:
+
+use Illuminate\Http\Request;
+
+
+Route::post('notas', function (Request $request) {
+    Note::create([
+        'title' => $request->input('title'),
+        'content' => $request->input('content'),
+    ]);
+})->name('notes.store');
+
+use Illuminate\Support\Facades\Request;
+
+Route::post('notas', function () {
+    Note::create([
+        'title' => Request::input('title'),
+        'content' => Request::input('content'),
+    ]);
+})->name('notes.store');
+
+
+------Injecion----
+
+Injectar Illuminate\Http\Request web.php:
+
+use Illuminate\Http\Request;
+
+
+Route::post('notas', function (Request $request) {
+    Note::create([
+        'title' => $request->input('title'),
+        'content' => $request->input('content'),
+    ]);
+
+    return redirect()->route('notes');
+
+})->name('notes.store');
+
+
+namespace App;
+ 
+use Illuminate\Database\Eloquent\Model;
+ 
+class Note extends Model
+{
+    protected $fillable = ['title', 'content'];
+}
+
+crear redirecccion:
+
+return back(); // Nos retorna a la URL anterior
+ 
+return redirect('/'); // Retorna a la URL indicada
+ 
+return redirect()->route('notes'); // Retorna a la ruta indicada

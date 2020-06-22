@@ -1,0 +1,16 @@
+cd  /var/www/hugo/stydePHP/PHPUnitPruebas/PHPUnitPrueba
+
+composer create-project --prefer-dist laravel/laravel PHPUnitPrueba
+
+composer require laravel/ui
+
+php artisan ui bootstrap --auth
+
+npm install && npm run dev
+
+ composer require phpunit/phpunit
+
+
+composer dump-autoload
+
+

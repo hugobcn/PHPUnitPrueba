@@ -1,0 +1,129 @@
+--origen---
+
+composer init
+
+name:hugo/container
+description: this is a demo, don't use in production
+author: hugoberpar  <hugo@hugo.eu>
+M. stability: stable
+Package type: library  project
+License[]: MIT
+
+Would...? no
+would you....? no
+
+confirm? yes
+
+composer require --dev phpunit/phpunit
+
+composer dump-autoload
+---------------add composer.json
+composer.json:
+
+    ,"require": {
+        "phpunit/phpunit": "^9.1"
+    },"require-dev": {
+        "mockery/mockery": "^1.4"
+    },
+        "autoload": {
+        "psr-4": {
+            "Hugo\\Container\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+}
+
+terminal: composer dump-autoload
+
+---------install instalar dependecias-----
+
+composer  install
+
+composer fund
+
+----namespace----
+
+src or app  en archivos:
+
+namespace Hugo\Container;  "name": "hugo/container",
+
+--probar phpunit--
+
+alias t=vendor/bin/phpunit
+
+t test
+
+--------DESTINO------------
+
+---Añadir vreado paquete a otro proyecto---
+
+composer.json:
+,"repositories":[
+{
+   "type":"path",
+    "url":"../container"      
+}
+]
+,"require": {
+        "hugo/container" : "dev-master",
+        "xxxx/yyyy": "<1.1"
+    }
+
+
+explicacion paquete local añadir:
+
+,"repositories":[
+{
+   "type":"path",
+    "url":"../container"      
+}
+]
+
+
+"url":"../container"    (Project/01xxxx/container)donde va ir
+
+
+----ORIGEN----
+
+
+crear projecto container en repositorio: ../02Container$ git init
+                                                         git status
+
+añadir fichero(.gitignore) en raiz proyecto para no instlar archivos o directorios  : 
+   añadir carpetas no querer añadir en fichero
+        .idea/
+        vendor/
+
+
+
+chequear funcionalidad .gitignore:  ../02Container$ git status
+añadir carpetas no ignoradas: ../02Container$ git add .
+chequear carpetas subidas:  ../02Container$ git status
+git config --global user.email "you@example.com"
+
+crear commit: ../02Container$ git commit -m "primer commit"
+crear nuevo repositorio en web gihub y C/P el nombre del repositorio:
+añadir git local a git web: ../02Container$ git remote add origin git@github.com: Hugo/container.git
+subir al git web:
+../02Container$ git push -u origin master
+
+
+git remote add origin   git@github.com:hugobcn/CrearComponenetePHP.git
+-------DESTINO------
+
+crear enlance hacias la carpeta container:
+
+git init????
+
+../01destino$ composer update
+
+Si estuviese  tambien en web, y queremos local :
+
+../01destino$ composer update --update --prefer-source
+
+Verrificar en proyecto destino carpeta Vendor
+
+verificar y cambiar use xxxx en los archivos  use Hugo\Container\foo;

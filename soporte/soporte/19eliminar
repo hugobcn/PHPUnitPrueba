@@ -1,0 +1,67 @@
+// routes/web.php
+Route::delete('notas/{id}', 'NoteController@destroy')
+    ->name('notes.destroy');
+
+
+
+
+!-- resources/views/note.blade.php -->
+@forelse($notes as $note)
+  <div class="card-body">
+    <!-- El resto del codigo aqui -->
+ 
+    <form method="POST" action="{{ url("notas/{$note->id}") }}">
+      @csrf
+      @method('DELETE')
+ 
+      <button type="submit">Eliminar</button>
+    </form>
+  </div>
+@empty
+  <!-- ... -->
+@endforelse
+
+
+class NoteController
+{
+    public function destroy($id)
+    {
+        $note = Note::find($id);
+        or
+        DB::table('notes')->delete($id);
+        
+        $note->delete();
+ 
+        return redirect('/');
+    }
+}
+
+-----Elimnanacion logica----
+
+namespace App;
+ 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+ 
+class Note extends Model
+{
+    use SoftDeletes;
+    
+    //...
+}
+
+class CreateNotesTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('notes', function (Blueprint $table) {
+            //...
+ 
+            $table->softDeletes();
+        });
+    }
+ 
+    //...
+}
+
+php artisan migrate:fresh --seed0

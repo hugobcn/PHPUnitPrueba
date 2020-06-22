@@ -1,0 +1,61 @@
+https://github.com/StydeNet/laravel-7
+https://github.com/StydeNet/laravel-7/tree/stringable
+https://github.com/StydeNet/laravel-7/compare/form_component...stringable
+https://laravel.com/docs/7.x/helpers
+https://laravel.com/api/7.x/Illuminate/Support/Str.html
+https://styde.net/manejo-de-cadenas-de-texto-con-laravel
+https://tahirjan.com/laravel-string-manipulations-with-str-class/
+https://laravel.com/docs/7.x/upgrade#assert-see
+
+
+use Illuminate\Support\Str;
+ 
+echo Str::of('create_notes')->camel();
+ 
+// imprime createNotes
+
+use Illuminate\Support\Str;
+ 
+Str::of('Laravel is a great framework')->contains('Laravel');
+ 
+// Devuelve true
+
+
+use Illuminate\Support\Str;
+ 
+Str::of('HTML, CSS, JS')->explode(', ');
+ 
+// Retorna:
+ 
+=> Illuminate\Support\Collection {#955
+     all: [
+       "HTML",
+       "CSS",
+       "JS",
+     ],
+   
+
+
+<?php
+ 
+use Illuminate\Support\Str;
+ 
+$matches = Str::of('inv-09-04-2020')->is('inv*2020');
+ 
+// Devuelve verdadero
+
+
+use Illuminate\Support\Str;
+ 
+$result = Str::of('  ')->trim()->isNotEmpty();
+ 
+// true
+
+echo  Str::of('hugo bermudez')
+        ->slug()
+        ->prepend('perfil/')
+        ->finish('/')
+      Str::of($this->name)
+        ->ucfirst()
+        ->replace('_','')
+        ->finish(':')

@@ -1,0 +1,65 @@
+https://styde.net/generar-urls-con-laravel-6/
+
+el helper url, la ventaja de utilizar esta función por sobre colocar las URLs 
+estáticas es que Laravel se encargará {{ url('/') }} y {{ url('notas/crear') }}
+
+http://127.0.0.1:8000/notas/crear
+
+<!-- HTML -->
+<a href="{{ url("notas/{$loop->iteration}/editar") }}">
+<!-- HTML -->
+<a href="<?php echo e(url("notas/{$loop->iteration}/editar")) ?>">
+
+ NUNCA PONER  JAMAS{{ url("notas/{{ $loop->iteration }}/editar") }}
+
+resources/routes/web:php
+
+{{url('/')}}
+
+{{url()->current() == url('/') ? 'active' : ''}}
+
+<?php
+
+Route::pattern('id', '\d+');
+
+Route::get('/', function () {
+    $notes = [
+        //...
+    ];
+
+    return view('notes', ['notes' => $notes];
+})->name('notes.index');
+
+Route::get('notas/{id}', function ($id) {
+    return 'Aquí veremos los detalles de la nota: '.$id;
+})->name('notes.show');
+
+Route::get('notas/crear', function () {
+    return view('add-note');
+})->name('notes.create');
+
+Route::get('notas/{id}/editar', function ($id) {
+    return 'Aquí podremos editar la nota: '.$id;
+})->name('notes.edit');
+
+
+layout:
+
+
+
+
+<!-- layout.blade.php -->
+<li class="nav-item active">
+    <a class="nav-link" href="{{ route('notes.index') }}">Notas<span class="sr-only">(current)</span></a>
+</li>
+<li>
+    <a class="nav-link" href="{{ route('notes.create') }}">Nueva nota</a>
+</li>
+
+
+notes:
+
+<!-- notes.blade.php -->
+<a href="{{ route('notes.show', ['id' => $loop->iteration]) }}">
+    {{ $note }}
+</a>

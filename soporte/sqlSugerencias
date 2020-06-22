@@ -1,0 +1,86 @@
+$a->union($b)->orderBy(DB::raw('FIELD(layout, "normal", "split", "flip", "double-faced", "") ASC, layout'))->get();
+
+EDIT
+
+Researched about and found and prepared eloquent query just try this
+
+$modelA = Model::where('code', '=', $code)
+    ->where('col_a', '=' , 1)
+    ->orderBy(DB::raw('FIELD(layout, "normal", "split", "flip", "double-faced", "") ASC, layout'))
+
+$modelB = Model::where('code', '=', $code)
+    ->where('col_b', '=' , 1)
+    ->orderBy(DB::raw('FIELD(layout, "normal", "split", "flip", "double-faced", "") ASC, layout'))
+
+$a = DB::table(DB::raw("({$modelA->toSql()}) as a"))
+    ->mergeBindings($modelA->getQuery())
+    ->selectRaw("a.*");
+
+$b = DB::table(DB::raw("({$modelB->toSql()}) as b"))
+    ->mergeBindings($modelB->getQuery())
+    ->selectRaw("b.*");
+
+$a->union($b)->get();
+
+
+
+
+-----------------------------------
+
+
+$a = Model::where('code', '=', $code)
+->where('col_a', '=' , 1)
+->orderBy(DB::raw('FIELD(layout, "normal", "split", "flip", "double-faced", "") ASC, layout'))->get();
+
+$b = Model::where('code', '=', $code)
+->where('col_b', '=' , 1)
+->orderBy(DB::raw('FIELD(layout, "normal", "split", "flip", "double-faced", "") ASC, layout'))->get();
+
+$result = $a->merge($b);
+
+
+--------
+
+
+$videos = Video::whereIn('status', ['A', 'B'])
+        ->where('app_user', '!=', $user->id)
+        ->with('user:id,name,avatar,city,state,country')
+        ->closeTo($user->latitude, $user->longitude);
+
+
+    $most_populars = Video::select(['app_videos.*', DB::raw('avg(app_videos_stats.rating) as rating, app_videos_stats.id as distance')])
+        ->leftJoin('app_videos_stats', 'app_videos_stats.app_video' , '=', 'app_videos.id')
+        ->whereNotIn('app_videos.id', $videos->pluck('id'))
+        ->whereIn('status', ['A', 'B'])
+        ->where('app_videos_stats.rating', '!=', null)
+        ->where('app_user', '!=', $user->id)
+        ->with('user:id,name,avatar,city,state,country')
+        ->orderByRaw('app_videos_statss.rating DESC')
+        ->groupByRaw('app_videos.id');
+
+
+------------------------------------------------
+
+$result= DB::connection('centralapp')
+        ->update('update plan_subscriptions
+            set
+            plan_id=1 ,
+            starts_at= ? ,
+            ends_at= ?
+            where subscribable_id = ?',[
+               \Carbon\carbon::today(), 
+              \Carbon\carbon::today()->addMonth(1),
+                 $user_id ]
+            );
+
+-------------------------------------------------------
+
+https://stackoverflow.com/questions/4464898/best-way-to-store-working-hours-and-query-it-efficiently/4465072
+
+https://github.com/spatie/opening-hours
+
+https://kapeli.com/cheat_sheets/PhpStorm.docset/Contents/Resources/Documents/index
+
+
+
+

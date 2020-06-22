@@ -1,0 +1,52 @@
+https://github.com/StydeNet/laravel-7
+https://github.com/StydeNet/laravel-7/compare/field_component...form_
+https://github.com/StydeNet/laravel-7/tree/form_component
+https://laravel.com/docs/7.x/upgrade#assert-see
+
+<!-- resources/views/components/form.blade.php -->
+<form {{ $attributes->merge(['class' => 'form']) }}>
+    {{ $slot }}    
+</form>
+
+Es lo mismo:
+
+<!-- resources/views/welcome.blade.php -->
+@component('components.form')
+    <x-field name="email_address" type="email" help="No compartiremos tu correo con terceros."></x-field>
+@endcomponent
+
+<!-- resources/views/welcome.blade.php -->
+<x-form method="post">
+    <x-field name="email_address" type="email"></x-field>
+</x-form>
+
+Uso de la directiva @props de Blade:
+
+<!-- resources/views/components/form.blade.php -->
+@props(['method'])
+ 
+<form method="{{ $method == 'get' ? 'get' : 'post' }}" {{ $attributes->merge(['class' => 'form']) }}>
+    @if ($method != 'get')
+        @csrf
+    @endif
+ 
+    @if (in_array(strtolower($method), ['put', 'patch', 'delete']))
+        @method($method)
+    @endif
+ 
+    {{ $slot }}
+</form>
+
+<!-- resources/views/welcome.blade.php -->
+<x-form method="post" :action="url('/')">
+    <!-- //... -->
+</x-form
+
+<?php
+    $component->withAttributes(['method' => 'post','action' => url('/')]);
+?>
+
+
+<!-- resources/views/welcome.blade.php -->
+<x-field name="email_address" type="email" help="No compartiremos tu correo con terceros."/>
+ 

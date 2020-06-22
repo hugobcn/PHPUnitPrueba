@@ -1,0 +1,34 @@
+blade
+
+
+layout todo ele codigo:
+
+<head> 
+    <title>@yield('title', 'App de notas')</title>
+</head>
+
+
+body 
+
+ @yield('content');
+
+
+
+notes:.php
+
+
+@extends('layout')
+
+@section('title', 'Listado de notas')
+
+@section('content')
+
+
+@endsection
+
+
+En el medio del HTML que has copiado y pegado agrega lo siguiente: @yield('content')
+
+De vuelta a notes.blade.php y add-note.blade.php, agrega esto al principio de la plantilla: @extends('layout')
+
+El resto del código de la plantilla lo vas a envolver en las directivas @section('content') y @endsection. Recarga la página y observa el resultado.

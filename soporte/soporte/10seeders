@@ -1,0 +1,64 @@
+php artisan make:seeder NoteSeeder
+
+<?php
+ 
+
+use \Illuminate\Support\Facades\DB;
+
+class NoteSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('notes')->insert([
+            'title' => 'Mi primera nota',
+            'content' => 'Contenido de la primera nota',
+        ]);
+    }
+}
+
+Los seeders registrados en DatabaseSeeder en database/seeds/DatabaseSeeder.php. 
+Dentro del método run llamamos al método call pasando como argumento el nombre 
+de la clase de nuestro seeder:
+
+class DatabaseSeeder extends Seeder
+{
+    public function run()
+    {
+        $this->call(NoteSeeder::class);
+    }
+}
+
+
+---ejecutar seed---
+
+php artisan db:seed
+
+php artisan db:seed --class=
+
+php artisan migrate:fresh --seed
+
+
+--agrgar datos---
+
+
+<?php
+
+DB::table('notes')->insert([
+    'title' => 'Instalación de Laravel',
+    'content' => /* ? */,
+]);
+
+
+
+
+<?php
+
+DB::table('notes')->insert([
+    'title' => 'Instalación de Laravel',
+    'content' => File::get(__DIR__.'/notes/installation.html'),
+]);
+
+
+php artisan migrate:fresh --seed
+
+php artisan db::seed

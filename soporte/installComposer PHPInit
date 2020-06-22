@@ -1,0 +1,83 @@
+https://styde.net/como-escribir-pruebas-unitarias-y-de-aplicacion-tipos-diferencias/
+https://styde.net/ejemplo-para-refactorizar-creando-la-estructura-base/
+https://github.com/StydeNet/refactoring-example/commit/a3998a63ef291bd1902fc94409c24c71fa9c112a
+
+---Creando el proyecto----
+
+Para crear un nuevo proyecto con Composer, crea un nuevo directorio y luego dentro de éste ejecuta el comando composer init y completa los valores de configuración:
+
+mkdir refactoring
+cd refactoring
+composer init
+ 
+
+Package Type: project
+2 Questiones  asking No
+
+
+---Install PHPUnit---
+
+composer require phpunit/phpunit
+
+----Configurar la autocarga de clases-------
+
+Dentro del archivo composer.json configuramos la autocarga de clases:
+Directorio que se crea  "App\\": "app/" osea folder: .
+Public no se guardar  aqui y alli se añade Index.
+
+ {
+    "name": "hugoberpar/05calistenia-poo-identico-metodo",
+    "type": "project",
+    "require": {
+        "phpunit/phpunit": "^9.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+    }
+}
+
+
+---cargar new configuracion ---
+
+composer dump-autoload
+
+--Utilizar archivo msimo espacio---
+
+ require '../vendor/autoload.php';
+
+
+-- archivos en carpeta 'tests' ----
+
+use PHPUnit\Framework\TestCase as BaseTestcase;
+
+class TestCase extends BaseTestcase{
+
+ /** @test */
+    function test_it_asserts_true(){
+        $this->assertTrue(true);
+    }
+
+
+}
+
+--lnazar pruebas---
+
+vendor/bin/phpunit
+
+alias t=vendor/bin/phpunit     $t
+
+
+
+
+
+
+

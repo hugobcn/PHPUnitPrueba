@@ -1,0 +1,30 @@
+// routes/web.php
+Route::put('notas/{note}', 'NoteController@update')->name('notes.update
+
+
+class NoteController
+{
+    //...
+ 
+    public function update(Note $note, Request $request)
+    {
+
+      
+        $request->validate([
+            'title' => ['required','min:3', Rule::unique('notes')->ignore($note)],
+            'content' => 'required',
+        ]);
+ 
+        $note->update($data);
+        or
+        $note->update([
+    'title' => $request->input('title'),
+    'content' => $request->input('content'),
+]);
+        
+        return "Actualizando nota: {$note->title}";
+        or
+        or return redirect('/');
+    }
+}
+

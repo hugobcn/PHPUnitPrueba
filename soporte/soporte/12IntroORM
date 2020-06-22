@@ -1,0 +1,131 @@
+https://github.com/StydeNet/primeros-pasos-con-laravel-6/compare/database_3...database_4
+
+---modelos----
+
+php artisan make:model Note
+
+
+php artisan make:model Models/Note
+
+--crear registro---
+
+
+
+<?php
+
+DB::table('notes')->insert([
+  /**/
+]);
+
+or
+
+use App\Note;
+
+Note::create([
+  /**/
+]);
+
+php artisan migrate:fresh --seed
+
+
+use App\Note;
+ 
+// Para obtener todas las notas de la tabla notes
+$notes = Note::all();
+ 
+// Para obtener la nota que corresponda con el ID dado 
+// (o null si no es encontrada).
+$note = Note::find($id);
+
+modelos:
+
+<?php
+ 
+namespace App;
+ 
+use Illuminate\Database\Eloquent\Model;
+ 
+class Note extends Model
+{
+    protected $table = 'notes';
+}
+
+/ Puedes escribir:
+Note::where('id', $id)->first();
+ 
+// En vez de:
+DB::table('notes')->where('id', $id)->first();
+
+
+-----thinker-----
+
+php artisan 
+
+DB::table('notes')->get();
+// Devuelve Illuminate\Support\Collection
+// y cada registro es una instancia de la clase genérica de PHP
+ 
+App\Note::all();
+// Devuelve Illuminate\Database\Eloquent\Collection
+// y cada registro es una instancia de la clase App\Note
+ 
+DB::table('notes')->first();
+// Devuelve un objeto de la clase genérica de PHP
+ 
+App\Note::first();
+// Devuelve un objeto de la clase App\Note
+
+------------------------
+web.php:
+
+Route::get('/', function () {
+    
+    $notes = Note::all();
+
+}
+
+Route::get('notas/{id}/editar', function ($id) {
+    $note = DB::table('notes')
+        ->where('id', $id)
+        ->first();
+    $note = Note::find($id);
+
+}
+
+dta/seeds/notesseder:        
+
+
+       use App\Note;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+
+class NoteSeeder extends Seeder
+@@ -13,29 +13,29 @@ class NoteSeeder extends Seeder
+     */
+    public function run()
+    {
+
+        Note::create([
+            'title' => 'Cambia el formato de parámetros dinámicos',
+            'content' => File::get(__DIR__.'/notes/route-parameter-constraints.html')
+        ]);
+
+nombre modelos  USER   nombre tabla users
+                NoteCategorry      note_xategories
+
+
+
+php artisan tinker
+
+DB::table('notes')->first();
+
+App\Note::first();
+
+
+DB::table('notes')->take(2)->get();
+
+App\Note::take(2)->get();
+
+
+exit (salir)

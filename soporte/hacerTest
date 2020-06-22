@@ -1,0 +1,4 @@
+vendor/bin/phpunit
+alias t=vendor/bin/phpunit
+
+composer dump-autoload

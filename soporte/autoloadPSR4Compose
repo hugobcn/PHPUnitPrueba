@@ -1,0 +1,37 @@
+https://styde.net/ejemplo-para-refactorizar-creando-la-estructura-base/
+https://github.com/StydeNet/refactoring-example/commit/a3998a63ef291bd1902fc94409c24c71fa9c112a
+
+Creando el proyecto
+
+Para crear un nuevo proyecto con Composer, crea un nuevo directorio y luego dentro de éste ejecuta el comando composer init y completa los valores de configuración:
+
+mkdir refactoring
+cd refactoring
+composer init
+ 
+
+Package Type: project
+2 Questiones  asking No
+
+Configurar la autocarga de clases
+
+Dentro del archivo composer.json configuramos la autocarga de clases:
+Directorio que se crea  "App\\": "app/" osea folder: .
+Public no se guardar  aqui y alli se añade Index.
+
+"autoload": {
+    "psr-4": {
+        "App\\": "app/"
+    }
+}
+
+
+Generar archivo autoload
+
+Generamos el archivo autoload.php con el comando dump-autoload:
+ 
+composer dump-autoload
+
+Recuerda incluirlo en el archivo desde donde quieras obtener acceso automático a las clases dentro de app/.
+ Por ejemplo utilizando require '../vendor/autoload.php'.
+

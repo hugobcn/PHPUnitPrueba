@@ -1,0 +1,80 @@
+https://styde.net/como-crear-virtual-hosts-con-apache-para-linux-y-mac/
+
+
+-----------------------------
+-----------------------------
+crear
+-----------------------------
+-----------------------------
+
+
+cd /etc/apache2/sites-available/
+
+sudo cp 000-default.conf proyecto-laravel.local.conf
+
+sudo gedit proyecto-laravel.local.conf
+
+
+---------------------------------------------
+
+<VirtualHost *:80>
+    ServerName proyecto-laravel.com
+    ServerAlias www.proyecto-laravel.com
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/hugo/prLab/proyecto-laravel/public
+    
+
+<Directory /var/www/hugo/prLab/proyecto-laravel/public>
+	Options Indexes FollowSymLinks MultiViews
+	AllowOverride All
+	Order allow,deny
+	allow from all
+</Directory>
+
+ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+
+
+----------------------------------------------------
+
+sudo a2ensite proyecto-laravel.local.conf
+
+sudo gedit /etc/hosts
+
+-----------------------------------------------------
+
+127.0.0.1	localhost
+127.0.1.1	debian
+127.1.1.1       serverSOPlocalhost.com.sv
+127.0.0.1	aprendiendo-laravel.com
+127.0.0.1       proyecto-laravel.com
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+
+
+-------------------------------------------------------------
+
+sudo a2enmod rewrite
+
+sudo service apache2 restart
+
+sudo systemctl restart apache2
+
+sudo systemctl status apache2
+
+Q
+
+-----------------------------
+-----------------------------
+eliminar
+-----------------------------
+-----------------------------
+
+sudo a2dissite cms.local.conf
+sudo systemctl reload apache2

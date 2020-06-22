@@ -1,0 +1,22 @@
+https://laravel.com/docs/7.x/installation
+
+--instalacion simple---
+
+cd /var/www/hugo/stydePHP/PrimerosPasosLaravel/01PrimerosPasosLaravel
+
+ sudo chmod -R 777 /var/www/hugo/stydePHP/PrimerosPasosLaravel
+
+
+
+composer create-project --prefer-dist laravel/laravel cursoPrimerosPasoslaravelStyde 
+
+---chequear version y paquetes instalados---
+
+php artisan --version
+
+php artisan list 
+
+php artisan serve   ( http://127.0.0.1:8000)
+
+/var/www/hugo/stydePHP/PrimerosPasosLaravel/01PrimerosPasosLaravel/cursoPrimerosPasoslaravelStyde
+

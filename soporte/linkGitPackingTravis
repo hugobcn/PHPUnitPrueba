@@ -1,0 +1,246 @@
+--origen---
+
+composer init
+
+name:hugo/container
+description: this is a demo, don't use in production
+author: hugoberpar  <hugo@hugo.eu>
+M. stability: stable
+Package type: library  project
+License[]: MIT
+
+Would...? no
+would you....? no
+
+confirm? yes
+
+composer require --dev phpunit/phpunit
+
+composer dump-autoload
+---------------add composer.json
+composer.json:
+
+    ,"require": {
+        "phpunit/phpunit": "^9.1"
+    },"require-dev": {
+        "mockery/mockery": "^1.4"
+    },
+        "autoload": {
+        "psr-4": {
+            "Hugo\\Container\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+}
+
+terminal: composer dump-autoload
+
+---------install instalar dependecias-----
+
+composer  install
+
+composer fund
+
+----namespace----
+
+src or app  en archivos:
+
+namespace Hugo\Container;  "name": "hugo/container",
+
+--probar phpunit--
+
+alias t=vendor/bin/phpunit
+
+t test
+
+--------DESTINO------------
+
+---Añadir vreado paquete a otro proyecto---
+
+composer.json:
+,"repositories":[
+{
+   "type":"path",
+    "url":"../container"      
+}
+]
+,"require": {
+        "hugo/container" : "dev-master",
+        "xxxx/yyyy": "<1.1"
+    }
+
+
+explicacion paquete local añadir:
+
+,"repositories":[
+{
+   "type":"path",
+    "url":"../container"      
+}
+]
+
+
+"url":"../container"    (Project/01xxxx/container)donde va ir
+
+
+----ORIGEN----
+
+
+crear projecto container en repositorio: ../02Container$ git init
+                                                         git status
+
+añadir fichero(.gitignore) en raiz proyecto para no instlar archivos o directorios  : 
+   añadir carpetas no querer añadir en fichero
+        .idea/
+        vendor/
+
+
+
+chequear funcionalidad .gitignore:  ../02Container$ git status
+añadir carpetas no ignoradas: ../02Container$ git add .   
+ git add <folder>/*,  git add ../soporte/* 
+
+    git add --all
+
+    git commit -am "<commit message>"
+
+    git push
+chequear carpetas subidas:  ../02Container$ git status
+git config --global user.email "you@example.com"
+
+crear commit: ../02Container$ git commit -m "primer commit"
+crear nuevo repositorio en web gihub y C/P el nombre del repositorio:
+añadir git local a git web: ../02Container$ git remote add origin git@github.com: Hugo/container.git
+subir al git web:
+../02Container$ git push -u origin master
+
+-------DESTINO------
+
+crear enlance hacias la carpeta container:
+
+git init????
+
+../01destino$ composer update
+
+Si estuviese  tambien en web, y queremos local :
+
+../01destino$ composer update --update --prefer-source
+
+Verrificar en proyecto destino carpeta Vendor
+
+verificar y cambiar use xxxx en los archivos  use Hugo\Container\foo;
+
+
+-----packagist------
+https://styde.net/publicacion-de-paquetes-con-github-composer-y-packagist/
+
+https://packagist.org/about#naming-your-package
+
+
+destino composer.json:
+"require": {
+    "hugo/container":"dev-master"
+    },
+"minimum-stability": "dev",  "stable"
+"prefer-stable":true
+
+consola: composer update
+
+ir al directorio "origen": 
+$git tag -a 0.1 -m  "Demo container
+$git push -u origin --tags
+
+actulizar paquete automaticamnete en packgist
+
+- click en "Github Service Hook"
+
+-click your API token y C
+
+github repository:
+
+settings
+         webHooks&service
+                         Add Service
+                                    Packagist
+                                             confirm password
+                                    user : nombre usuario
+                                    token: P token copiado
+                                    active marcado
+                                    add service
+
+                        chequear cambios:
+                                         edit
+                                             test service
+
+podemos ir  a packcigst
+
+despues de esto podemos eliminar en  en directorio de destino podemos eliminar:
+
+
+"require": {
+    "hugo/container":"dev-master"
+    },
+"minimum-stability": "dev",  "stable"
+"prefer-stable":true
+
+directorio destino consola: composer require hugo/container  (ya se me actualiza la nueva version)
+
+
+Por ejemplo, puedes configurar el mínimo nivel de estabilidad a desarrollo en el fichero composer.json de proyectos que sólo vas a ejecutar en tu entorno local. Por ejemplo, para paquetes de pruebas y desarrollo.
+"minimum-stability": "dev"
+Y como mínimo Release Candidate en proyectos que vas a pasar a tu entorno de producción:
+"minimum-stability": "RC"
+
+Las opciones disponibles son: dev, alpha, beta, RC, y stable.
+
+El valor por defecto es stable. Si Composer no encuentra una versión que cumpla con el valor configurado por defecto en minimum-stability no instalará el paquete.
+
+Antes de que Composer incluyera la opción prefer-stable, la solución ‘más sencilla’ para no tener problemas al instalar paquetes era configurar minimum-stability al nivel más bajo posible, es decir, a dev. (Un ejemplo en estos momentos es la versión 6.* de laravel/framework).
+
+------Travis CI-----
+
+ registrate en https://travis-ci.org/ nuestra cuenta github
+
+Activa los repositorios que quieres usar con Travis CI y configura cómo va a 
+trabajar añadiendo el archivo de configuración .travis.yml en la de l proyecto 
+del proyecto en Github.
+
+autorizar en travis  uso de girtub con password.
+
+confirmar repositorio. Y apretar repositorio
+
+crear .travis.yml en directorio: 
+
+.travis.yml:
+
+language: php
+
+php:
+- 5.5.9
+- 5.6
+- 7.0
+- 7.4
+
+install:
+
+    composer install
+
+script:
+
+    vendor/bin/phpunit   
+
+
+carpeta de nuestro proyecto terminal:
+
+git status
+
+git add .travis.yml
+git commit -m "sunido .travis"
+git push -u  origin master
+
+
+
+git clone @ gitgithub.com:hugo/container.git hugo-container

@@ -1,0 +1,20 @@
+
+Lo único que tendrías que hacer es añadir en AppServiceProvider esto:
+
+use Illuminate\Support\Facades\Schema;
+
+public function boot()
+{
+    Schema::defaultStringLength(191);
+}
+
+php artisan make:migration create_notes_table  (crear tabla)
+
+method  up (como actuarcata migracion)
+mthoh down (como deshacer lo hecho)
+
+$table->bigIncrements('id ai utoincremento    $table->id())
+$table ->timestamp ('update_at, $orecisn = 0)_->nullable
+
+
+revertir migracion: php artisan migrate:rollback 

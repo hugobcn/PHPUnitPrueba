@@ -1,0 +1,55 @@
+01 IntroducionPatrones: https://github.com/StydeNet/design-patterns-php/tree/composite1/composite
+
+https://github.com/hugobcn/design-patterns-php/tree/strategy2
+--- phpunit ---
+
+alias t=vendor/bin/phpunit
+
+---------
+
+$index = array_search($element, $this->children, true);
+ 
+Con is_int podemos comprobar si el argumento que recibimos es un entero:
+
+if (is_int($index)) { // o tambien podriamos escribir: if ($index !== false)
+    // ..
+}
+
+---str_replace  ----
+html (convierte una frase de con etiquetas html a salto de linea + 4 espacios
+ de buen formato en cadaq etiqueta)
+
+$expected = <<<HTML
+str_replace([PHP_EOL,'    '], '', $expected)  (4 espacios x ninguno)
+
+https://www.php.net/manual/es/function.str-replace.php
+https://www.w3schools.com/php/func_string_str_replace.asp
+
+ PHP_EOL (string)
+    El símbolo 'Fin De Línea' correcto de la plataforma en uso. Disponible desde PHP 5.0.2 
+
+
+------rnviar mail----
+
+composer.json
+,
+    "require": {
+        "phpmailer/phpmailer": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.4",
+        "stephanecoinon/mailtrap": "dev-master"
+    },
+
+
+----mailtrap---
+https://github.com/hugobcn/design-patterns-php/tree/strategy2
+https://packagist.org/packages/stephanecoinon/mailtrap
+https://github.com/stephanecoinon/mailtrap/tree/master/src
+
+
+---phpMailer---
+
+
+https://packagist.org/packages/phpmailer/phpmailer
+https://github.com/PHPMailer/PHPMailer

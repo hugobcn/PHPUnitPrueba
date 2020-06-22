@@ -1,0 +1,44 @@
+routes/web.php:
+
+
+<?php
+
+// use Illuminate\Support\Facades\DB;
+
+Route::get('/', function () {
+    $notes = DB::table('notes')->get();
+
+    return view('notes', ['notes' => $notes]);
+})->name('notes');
+
+
+mostrar
+
+<div class="card-body">
+  <h4>{{ $note->title }}</h4>
+ 
+  <p>
+    {{ $note->content }}
+  </p>
+</div>
+
+
+
+<p>
+  {!! $note->content !!} {* @todo Purificar HTML para evitar ataques XSS *}
+</p>
+
+
+obetener registro:
+
+
+<?php
+
+Route::get('notas/{id}/editar', function ($id) {
+    $note = DB::table('notes')
+        ->where('id', $id)
+        ->first();
+        -get(); ( obteber collecion)
+
+    return ['note' => $note];
+})->name('notes.edit');

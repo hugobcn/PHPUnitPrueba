@@ -1,0 +1,96 @@
+https://github.com/StydeNet/laravel-7
+https://github.com/StydeNet/laravel-7/tree/form_
+https://github.com/StydeNet/laravel-7/compare/field_component...form_component
+https://laravel.com/docs/7.x/upgrade#assert-see
+
+resources/views/welcome.blade.php 
+
+<x-field></x-field
+
+php artisan make:component Field :
+
+- app/View/Components/Field.php 
+- resources/views/components/field.blade.php.
+
+app/View/Components/Field.php y una vista en resources/views/components/field.blade.php.
+
+<!-- resources/views/components/field.blade -->
+
+<div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+</div>
+
+
+<de resources/views/welcome.blade.php
+
+<div class="container">
+    <div class="row">
+        <div class="col col-8">
+            <x-field></x-field>
+        </div>
+    </div>
+
+LABEL
+
+php artisan view:clear  despues cambios, asegurar vista de recopilacion
+
+
+
+
+</div>
+
+
+<!-- resources/views/welcome.blade.php -->
+<x-field type="email" name="email" help="No compartiremos tu correo electrónico con terceros."></x-field>
+
+/ app/View/Components/Field.php
+    use Illuminate\Support\Facades\Lang;
+ 
+    public function label()
+    {
+        if ($this->label != null) {
+            return $this->label;
+        }
+ 
+        if (Lang::has("validation.attributes.{$this->name}")) {
+            return Lang::get("validation.attributes.{$this->name}");
+        }
+ 
+        return ucfirst(str_replace('_', ' ', $this->name));
+    }
+
+facade de Laravel, pero los nuevos View Components se instancian a través del Contenedor de Inyección de Dependencias de Laravel, por lo tanto esto también es posible:
+
+ 
+<?php
+ 
+namespace App\View\Components;
+ 
+use Illuminate\Translation\Translator;
+ 
+class Field extends Component
+{
+    /**
+     * @var Translator
+     */
+    private $translator;
+ 
+    public function __construct(Translator $translator)
+    {
+        $this->translator = $translator;
+ 
+        //...
+    }
+ 
+    public function label()
+    {
+        //...
+ 
+        if ($this->translator->has("validation.attributes.{$this->name}")) {
+            return $this->translator->get("validation.attributes.{$this->name}");
+        }
+ 
+        //...
+    }

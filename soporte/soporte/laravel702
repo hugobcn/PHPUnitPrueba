@@ -1,0 +1,44 @@
+https://github.com/StydeNet/laravel-7
+https://laravel.com/docs/7.x/upgrade#assert-see
+
+uevos métodos id() y foreignId() que tienen como objetivo 
+ columnas de llaves primarias y foráneas de nuestras aplicaciones 
+mediante el sistema de migraciones, como veremos a continuación.
+
+lass CreateUsersTable extends Migration
+{
+    /**/
+    public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->bigIncrements('id');  // <--- AQUI
+            
+            //...
+        });
+    }
+
+
+ public function up()
+    {
+        Schema::create('posts', function (Blueprint $table) {
+            //...
+ 
+            $table->unsignedBigInteger('user_id'); // UNSIGNED BIG INT
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
+ 
+            //...
+        });
+
+
+        Schema::create('posts', function (Blueprint $table) {
+    //...
+ 
+    $table->foreignId('user_id') // UNSIGNED BIG INT
+        ->nullable() // <-- IMPORTANTE: LA COLUMNA DEBE ACEPTAR NULL COMO VALOR VALIDO
+        ->constrained()  // <-- DEFINE LA RESTRICCION DE LLAVE FORANEA
+        ->onDelete('SET NULL'); // <-- AL ELIMINAR UN USUARIO SUS POSTS QUEDARAN SIN AUTOR
+
+ 
+    }

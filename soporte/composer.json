@@ -1,0 +1,26 @@
+{
+    "name": "hugoberpar/01patrones",
+    "description": "crear patrones",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hugo bermudez",
+            "email": "hugoberpar@hugoberpar.eu"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "phpunit/phpunit": "^9.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Styde\\Html\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Styde\\Tests\\": "tests/"
+        }
+    }
+}

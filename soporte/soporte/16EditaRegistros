@@ -1,0 +1,45 @@
+
+web:
+
+
+
+<h1>Editar nota</h1>
+<!-- listado de errores aqui -->
+<form method="POST" action="{{ url("notas/###") }}">
+    @csrf
+    @method('PUT')
+    <!-- ... -->
+    <input type="text" name="title" value="{{ old('title', 'Titulo actual') }}">
+    <!-- ... -->
+    <textarea name="content">{{ old('content', 'Contenido actual') }}</textarea>
+    <!-- ... -->
+    <button type="submit" class="btn btn-primary">Actualizar nota</button>
+</form>
+
+NoteContoller:
+
+class NoteController
+{
+    //...
+ 
+    public function edit($id)
+    {
+        $note = Note::find($id);
+ 
+        return view('edit-note', ['note' => $note]);
+    }
+}
+
+
+control con id:
+
+<form method="POST" action="{{ url("notas/{$note->id}") }}">
+    <!-- ... -->
+    <input name="title" value="{{ old('title', $note->title) }}">
+    <!-- ... -->
+    <textarea name="content">{{ old('content', $note->content) }}</textarea>
+    <!-- ... -->
+</form>
+ 
+
+

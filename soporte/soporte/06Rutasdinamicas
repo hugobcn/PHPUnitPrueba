@@ -1,0 +1,79 @@
+
+
+
+Id solo numero de forma global,agregando lo siguiente al método boot 
+dentro de app/Providers/RouteServiceProvider.php:
+
+public function boot()
+    {
+        //solo acepta numeros de forma global
+        Route::pattern('id', '\d+');
+ 
+        parent::boot();
+    }
+
+router/web.php:
+
+
+
+id igual alfanumerico:
+
+Route::get('notas/{id}', function ($id) {
+    return 'Aquí veremos los detalles de la nota: '.$id;
+});
+
+numerico:
+
+Route::get('notas/{id}/editar', function ($id) {
+    return 'Aquí podremos editar la nota: '.$id;
+})->where('id', '[0-9]+');   // o ->where('id', '\d+'
+
+href="{{ asset('/static/css/app.css') }}" (directamente al de /public)
+
+
+php artisan views::clear
+
+------loops balde-----
+
+
+https://laravel.com/docs/7.x/blade#loops
+
+$loop->iteration
+
+@foreach($things as $thing)
+
+ @if( $loop->first or $loop->iteration  <= 3 )
+
+       <tr>
+          <td>{{$thing)->id}}</td>
+          <td>{{$thing)->name}}</td>
+          <td>{{$thing)->email}}</td>
+        </tr>
+        @endif
+ @endforeach
+
+@forelse($notes as $note)
+@foreach($things as $thing)
+
+ xxxxx
+
+@empty 
+<p>no hay elemeneto </p>
+ @endforeach
+
+
+Route::get('/', function () {
+    
+    $notes = [
+//        'Mi primera nota',
+//        'Mi segunda nota',
+//        'Mi tercera nota',
+//        'Mi cuarta nota',
+    ];
+
+    return view('notes', ['notes' => $notes]);
+});
+
+
+
+
